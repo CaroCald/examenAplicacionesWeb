@@ -28,18 +28,19 @@ export class  AutorizacionController {
 
     @Post('cerrarSesion')
     cerrarSesion(@Req() request, @Res() response){
-        const nombreCookie = request.cookies= 'undefined';
-        console.log(nombreCookie);
-        return response.cookie(nombreCookie).send({
-            mensaje:'USTED SALIO DEL SISTEMA'
-        });
-
+        return response.clearCookie(request.cookies).send({mensaje: 'ha salido del sistema'});
     }
     @Get('cerrarSesion')
     irAcerrarSesion(@Req() request, @Res() response){
-        const nombreCookie = request.cookies= 'undefined';
-        console.log(nombreCookie);
-        return response.cookie(nombreCookie);
+        response.clearCookie(request.cookies);
+        const nuevaCookie={
+            valor: 'andrianeguez',
+            nombre:'undefined'
+        };
+        return response.clearCookie().cookie(nuevaCookie.nombre, nuevaCookie.valor).send({
+            mensaje:'USTED SALIO DEL SISTEMA'
+        });
+
 
     }
 }
