@@ -2,9 +2,9 @@ import {Injectable} from "@nestjs/common";
 
 @Injectable()
 export class MedicamentoService {
-    arregloMedicamento: MedicamentoClass[] = [];
+    arregloMedicamento: Medicamento[] = [];
 
-    crearMedicamento(medicamento: MedicamentoClass): MedicamentoClass[] {
+    crearMedicamento(medicamento: Medicamento): Medicamento[] {
         this.arregloMedicamento.push(medicamento);
         return this.arregloMedicamento;
     }
@@ -43,7 +43,7 @@ export class MedicamentoService {
 }
 
 
-export class MedicamentoClass{
+export class Medicamento{
     constructor(
         public gramos: number,
         public nombre: string,

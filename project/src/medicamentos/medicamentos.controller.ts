@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nestjs/common";
-import {MedicamentoClass, MedicamentoService} from "./medicamento.service";
+import {Medicamento, MedicamentoService} from "./medicamento.service";
 import {PipesUsuarios} from "../pipes/pipes.usuarios";
 import {MEDICAMENTO_SCHEMA} from "./medicamento.schema";
 
@@ -18,29 +18,9 @@ export class MedicamentosController {
     //@UsePipes(new PipesUsuarios(MEDICAMENTO_SCHEMA))
     @Post('Medicamento')
     crearMedicamentos(@Body() bodyParams, @Res() res, @Req() req){
-        const enviagramos= bodyParams.gramos;
-        const enviaNombre= bodyParams.nombre;
-        const enviaComposicion= bodyParams.composicion;
-        const enviaUsado= bodyParams.usadoPara;
-        const enviaFecha= bodyParams.fechaCaducidad;
-        const enviaPastillas= bodyParams.numeroPastillas;
-        const enviaId=bodyParams.pacienteId;
-
-        const enviaParametros =(enviagramos &&enviaNombre  && enviaComposicion &&enviaUsado && enviaFecha && enviaPastillas&& enviaId);
-        if(enviaParametros){
-            const paciente = new  MedicamentoClass(bodyParams.gramosAlIngerir,  bodyParams.nombre,
-                bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId );
-            return res.send(this.medicamentoService.crearMedicamento(paciente));
-        }else{
-            return res
-                .status(400)
-                .send({
-                    mensaje: 'No envia parametros',
-                    status: 400
-                })
-        }
-
-
+        const medicamento = new  Medicamento(bodyParams.gramos,  bodyParams.nombre,
+            bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId );
+            return res.send(this.medicamentoService.crearMedicamento(medicamento));
 
     }
 
@@ -53,7 +33,7 @@ export class MedicamentosController {
 
     @Put('Medicamento/:id')
     editarUno(@Body() bodyParams, @Res() res, @Param () parametro){
-        const respuesta=this.medicamentoService.editarUno(parametro.id, bodyParams.gramosAlIngerir,  bodyParams.nombre,
+        const respuesta=this.medicamentoService.editarUno(parametro.id, bodyParams.gramos,  bodyParams.nombre,
             bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId);
         return res.send(respuesta);
     }
