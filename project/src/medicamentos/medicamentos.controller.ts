@@ -3,7 +3,7 @@ import {MedicamentoClass, MedicamentoService} from "./medicamento.service";
 import {PipesUsuarios} from "../pipes/pipes.usuarios";
 import {MEDICAMENTO_SCHEMA} from "./medicamento.schema";
 
-@Controller('Medicamentos')
+@Controller()
 export class MedicamentosController {
 
     constructor(private medicamentoService: MedicamentoService){
@@ -15,10 +15,10 @@ export class MedicamentosController {
         return this.medicamentoService.arregloMedicamento
     }
 
-    @UsePipes(new PipesUsuarios(MEDICAMENTO_SCHEMA))
+    //@UsePipes(new PipesUsuarios(MEDICAMENTO_SCHEMA))
     @Post('Medicamento')
-    crearPacientes(@Body() bodyParams, @Res() res, @Req() req){
-        const enviagramos= bodyParams.gramosAlIngerir;
+    crearMedicamentos(@Body() bodyParams, @Res() res, @Req() req){
+        const enviagramos= bodyParams.gramos;
         const enviaNombre= bodyParams.nombre;
         const enviaComposicion= bodyParams.composicion;
         const enviaUsado= bodyParams.usadoPara;
@@ -26,7 +26,7 @@ export class MedicamentosController {
         const enviaPastillas= bodyParams.numeroPastillas;
         const enviaId=bodyParams.pacienteId;
 
-        const enviaParametros =(enviaId && enviaNombre && enviagramos && enviaFecha && enviaComposicion &&enviaUsado && enviaPastillas);
+        const enviaParametros =(enviagramos &&enviaNombre  && enviaComposicion &&enviaUsado && enviaFecha && enviaPastillas&& enviaId);
         if(enviaParametros){
             const paciente = new  MedicamentoClass(bodyParams.gramosAlIngerir,  bodyParams.nombre,
                 bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId );

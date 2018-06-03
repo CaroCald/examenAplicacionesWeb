@@ -3,20 +3,21 @@ import {Paciente, PacienteService} from "./paciente.service";
 import {PipesUsuarios} from "../pipes/pipes.usuarios";
 import {PACIENTE_SCHEMA} from "./paciente.schema";
 
-@Controller('Usuario')
+@Controller()
 export class PacienteController {
  constructor(private _pacienteService:PacienteService){
 
 }
-    @Get()
+    @Get('Paciente')
     mostrarTodos(){
         return this._pacienteService.arregloPacientes;
     }
 
-    @UsePipes(new PipesUsuarios(PACIENTE_SCHEMA))
-    @Post()
+
+    @Post('Paciente')
+   // @UsePipes(new PipesUsuarios(PACIENTE_SCHEMA))
     crearPacientes(@Body() bodyParams, @Res() res, @Res() req){
-        const enviaId= bodyParams.idPaciente;
+        const enviaId= bodyParams.id;
         const enviaNombre= bodyParams.nombre;
         const eniaApellido= bodyParams.apellido;
         const enviaFecha= bodyParams.fechaNacimiento;
@@ -40,17 +41,19 @@ export class PacienteController {
 
     }
 
-
-    @Get('Usuario/:id')
+    @Get('Paciente/:id')
     obtenerUno(@Res() res, @Req() req, @Param() parametros) {
         const paciente=this._pacienteService.obtenerUno(parametros.id);
         return res.send(paciente);
     }
 
-    @Put('Usuario/:id')
+    @Put('Paciente/:id')
     editarUno(@Body() bodyParams, @Res() res, @Param() parametro){
         const respuesta=this._pacienteService.editarUno(parametro.id,bodyParams.nombre, bodyParams.apellido, bodyParams.fecha, bodyParams.hijos, bodyParams.seguro);
         return res.send(respuesta);
     }
+
+
+
 
 }

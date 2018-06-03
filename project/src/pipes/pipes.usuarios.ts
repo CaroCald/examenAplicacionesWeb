@@ -30,13 +30,7 @@ export class PipesUsuarios implements PipeTransform{
                 4
             );
         }
-        if(errorNotFound){
-            throw  new NoEncontradoException(
-                'No encontrado',
-                errorNotFound,
-                3
-            )
-        }
+
         //return valorEnBrutoDelRequest;
 
     }

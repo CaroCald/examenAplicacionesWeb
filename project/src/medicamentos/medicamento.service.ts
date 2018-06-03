@@ -28,7 +28,7 @@ export class MedicamentoService {
 
     editarUno(id, gramosAingerir, nombre, composicion, usadoPara, fechaCaducidad, numeroPastillas, pacienteID){
         let arregloU=this.obtenerUno(id);
-        arregloU.gramosAlIngerir=gramosAingerir;
+        arregloU.gramos=gramosAingerir;
         arregloU.nombre=nombre;
         arregloU.composicion=composicion;
         arregloU.usadoPara=usadoPara;
@@ -45,7 +45,7 @@ export class MedicamentoService {
 
 export class MedicamentoClass{
     constructor(
-        public gramosAlIngerir: number,
+        public gramos: number,
         public nombre: string,
         public composicion: string,
         public usadoPara: string,
