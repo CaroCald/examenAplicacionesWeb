@@ -1,19 +1,21 @@
 import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nestjs/common";
-import {MedicamentoClass, MedicamentoService} from "./medicamentos.service";
-import {PipePacientes} from "../pipes/pipes";
-import {MEDICAMENTO_SCHEMA} from "./medicamentos.schema";
+import {MedicamentoClass, MedicamentoService} from "./medicamento.service";
+import {PipesUsuarios} from "../pipes/pipes.usuarios";
+import {MEDICAMENTO_SCHEMA} from "./medicamento.schema";
 
-@Controller()
-export  class MedicamentoController {
+@Controller('Medicamentos')
+export class MedicamentosController {
+
     constructor(private medicamentoService: MedicamentoService){
 
     }
+
     @Get('Medicamento')
     mostrarTodos(){
         return this.medicamentoService.arregloMedicamento
     }
 
-    @UsePipes(new PipePacientes(MEDICAMENTO_SCHEMA))
+    @UsePipes(new PipesUsuarios(MEDICAMENTO_SCHEMA))
     @Post('Medicamento')
     crearPacientes(@Body() bodyParams, @Res() res, @Req() req){
         const enviagramos= bodyParams.gramosAlIngerir;
@@ -55,6 +57,5 @@ export  class MedicamentoController {
             bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId);
         return res.send(respuesta);
     }
-
 
 }

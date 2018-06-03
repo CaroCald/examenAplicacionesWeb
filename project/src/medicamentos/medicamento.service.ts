@@ -1,12 +1,7 @@
+import {Injectable} from "@nestjs/common";
 
-import { Injectable} from "@nestjs/common";
 @Injectable()
 export class MedicamentoService {
-
-    constructor(medicamentoService: MedicamentoService) {
-
-    }
-
     arregloMedicamento: MedicamentoClass[] = [];
 
     crearMedicamento(medicamento: MedicamentoClass): MedicamentoClass[] {

@@ -1,4 +1,5 @@
-import { Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
+
 @Injectable()
 export class PacienteService {
 
@@ -31,7 +32,6 @@ export class PacienteService {
 
 
 }
-
 export class Paciente {
 
 
@@ -47,6 +47,4 @@ export class Paciente {
 
 
 
-    }
-
-}
+    }}

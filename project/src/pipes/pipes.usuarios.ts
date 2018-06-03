@@ -1,11 +1,9 @@
-import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from '@nestjs/common';
+import {ArgumentMetadata, Injectable, PipeTransform} from "@nestjs/common";
 import * as Joi from 'joi';
 import {PeticionInvalidaException} from "../exceptions/peticion-invalida.exception";
-import {MEDICAMENTO_SCHEMA} from "../medicamentos/medicamentos.schema";
-import {PACIENTE_SCHEMA} from "../paciente/paciente.schema";
-import {NoEncontradoExpection} from "../exceptions/no-encontrado.exception";
+import {NoEncontradoException} from "../exceptions/no-encontrado.exception";
 @Injectable()
-export class PipePacientes implements PipeTransform {
+export class PipesUsuarios implements PipeTransform{
     constructor(private readonly schema) {}
     transform(
         valorEnBrutoDelRequest: any,
@@ -33,7 +31,7 @@ export class PipePacientes implements PipeTransform {
             );
         }
         if(errorNotFound){
-            throw  new NoEncontradoExpection(
+            throw  new NoEncontradoException(
                 'No encontrado',
                 errorNotFound,
                 3

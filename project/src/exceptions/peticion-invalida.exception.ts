@@ -15,4 +15,5 @@ export class PeticionInvalidaException extends HttpException {
             HttpStatus.BAD_REQUEST // StatusCode
         );
     }
+    
 }

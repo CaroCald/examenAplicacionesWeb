@@ -1,6 +1,6 @@
 import {HttpException, HttpStatus} from "@nestjs/common";
 
-export class NoEncontradoExpection extends HttpException {
+export class NoEncontradoException extends HttpException {
     constructor(private _mensaje,
                 private _detalle,
                 private _nivelError) {
@@ -15,4 +15,5 @@ export class NoEncontradoExpection extends HttpException {
             HttpStatus.NOT_FOUND
         );
     }
+
 }
