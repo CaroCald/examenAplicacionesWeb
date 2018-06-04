@@ -12,33 +12,10 @@ export class PacienteController {
     mostrarTodos(){
         return this._pacienteService.arregloPacientes;
     }
-
-
     @Post('Paciente')
-   // @UsePipes(new PipesUsuarios(PACIENTE_SCHEMA))
-    crearPacientes(@Body() bodyParams, @Res() res, @Res() req){
-        const enviaId= bodyParams.id;
-        const enviaNombre= bodyParams.nombre;
-        const eniaApellido= bodyParams.apellido;
-        const enviaFecha= bodyParams.fechaNacimiento;
-        const enviaHijos= bodyParams.hijos;
-        const enviaSeguro= bodyParams.tieneSeguro;
-
-        const enviaParametros =(enviaId && enviaNombre && eniaApellido && enviaFecha && enviaHijos && enviaSeguro);
-        if(enviaParametros){
+    crearPacientes(@Body(new PipesUsuarios(PACIENTE_SCHEMA)) bodyParams, @Res() res, @Res() req){
             const paciente = new  Paciente(bodyParams.idPaciente, bodyParams.nombre, bodyParams.apellido, bodyParams.fechaNacimiento, bodyParams.hijos, bodyParams.tieneSeguro);
             return res.send(this._pacienteService.crearPaciente(paciente));
-        }else{
-            return res
-                .status(400)
-                .send({
-                    mensaje: 'No envia parametros',
-                    status: 400
-                })
-        }
-
-
-
     }
 
     @Get('Paciente/:id')

@@ -1,13 +1,12 @@
 import {HttpException, HttpStatus} from "@nestjs/common";
 
 export class NoEncontradoException extends HttpException {
-    constructor(private _mensaje,
-                private _detalle,
+    constructor(private _detalle,
                 private _nivelError) {
 
         super(
             {
-                mensaje: _mensaje,
+                mensaje:'ERROR',
                 detalle: _detalle,
                 nivelError: _nivelError,
                 status: HttpStatus.NOT_FOUND

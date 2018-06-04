@@ -8,14 +8,6 @@ export class MedicamentoService {
         this.arregloMedicamento.push(medicamento);
         return this.arregloMedicamento;
     }
-
-    buscarPaciente(id) {
-        const usuarios = this.arregloMedicamento.map(medicamento => {
-            const idBuscada = medicamento.pacienteId;
-            return idBuscada;
-        });
-    }
-
     listarTodos() {
         return this.arregloMedicamento;
     }

@@ -2,6 +2,7 @@ import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nest
 import {Medicamento, MedicamentoService} from "./medicamento.service";
 import {PipesUsuarios} from "../pipes/pipes.usuarios";
 import {MEDICAMENTO_SCHEMA} from "./medicamento.schema";
+import {PACIENTE_SCHEMA} from "../paciente/paciente.schema";
 
 @Controller()
 export class MedicamentosController {
@@ -27,12 +28,20 @@ export class MedicamentosController {
 
     @Get('Medicamento/:id')
     obtenerUno(@Res() res, @Req() req, @Param() parametros) {
-        const medicamento=this.medicamentoService.obtenerUno(parametros.id);
-        return res.send(medicamento);
+        const validarId= (parametros.id);
+        if(validarId){
+            const medicamento=this.medicamentoService.obtenerUno(parametros.id);
+            return res.send(medicamento);
+        }
+        else
+        {
+            return res.send({mensaje: 'ID no encontrado'})
+        }
+
     }
 
     @Put('Medicamento/:id')
-    editarUno(@Body() bodyParams, @Res() res, @Param () parametro){
+    editarUno(@Body(new PipesUsuarios(PACIENTE_SCHEMA)) bodyParams, @Res() res, @Param () parametro){
         const respuesta=this.medicamentoService.editarUno(parametro.id, bodyParams.gramos,  bodyParams.nombre,
             bodyParams.composicion, bodyParams.usadoPara, bodyParams.fechaCaducidad, bodyParams.numeroPastillas, bodyParams.pacienteId);
         return res.send(respuesta);

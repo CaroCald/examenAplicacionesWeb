@@ -1,8 +1,9 @@
 import {ArgumentMetadata, Injectable, PipeTransform} from "@nestjs/common";
-import * as Joi from 'joi';
 import {PeticionInvalidaException} from "../exceptions/peticion-invalida.exception";
+import * as Joi from 'joi';
+import {NoEncontradoException} from "../exceptions/no-encontrado.exception";
 @Injectable()
-export class PipesUsuarios implements PipeTransform{
+export class PipesNoEncontrado implements PipeTransform{
     constructor(private readonly schema) {}
     transform(valorPaciente: any, metadatosDeLosDecoradoresDelNestjs: ArgumentMetadata) {
         const {error} = Joi.validate(
@@ -10,10 +11,10 @@ export class PipesUsuarios implements PipeTransform{
             this.schema
         );
         if (error) {
-            throw new PeticionInvalidaException(
+            throw new NoEncontradoException(
                 {
-                        erorr: error,
-                        mensaje: 'Error en paciente ',
+                    erorr: error,
+                    mensaje: 'No encontrado',
                 },
                 5
             );
